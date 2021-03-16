@@ -1,7 +1,7 @@
- <div class="flex justify-start md:flex flex-wrap mb-2" wire:poll.5000ms>  @if(count($skills) > 0) 
+ <div class="flex justify-start md:flex flex-wrap mb-2" wire:poll.5000ms> @if(count($skills) > 0)
      <h2 class="text-gray-800 font-semibold ml-2 mt-2"> Contractor Skills </h2>
      <hr class="w-full mt-2 mb-2">
-    
+
      <div class="flex flex-wrap">
          @foreach($skills as $skill)
          <span class="bg-indigo-100 text-indigo-600 text-xs font-semibold rounded-2xl mr-1 px-4 mb-1 ">
@@ -11,19 +11,19 @@
       2 = Rejected
       3 = Expired
       4 = Expiring -->
-     </div>   @endif
- </div> 
+     </div> @endif
+ </div>
 
 
  <div class="flex justify-start md:flex flex-wrap mb-2"> @if(count($documents) > 0)
      <h2 class="text-gray-800 font-semibold ml-2 mt-2"> Contractor Documents </h2>
      <hr class="w-full mt-2 mb-2">
 
-     <div class="grid md:grid-cols-4 text-sm"> @foreach ($documents as $id)
+     <div class="grid md:grid-cols-3 text-sm"> @foreach ($documents as $id)
          <div class="grid grid-cols-1">
-             <div class="text-gray-600 text-sm font-bold "> {{$id->Documents->name}} </div>
-             <div class="text-gray-500 text-xs">{{ucwords($id->Documents->documents_category->name)}}</div>
-             <div class="text-gray-500 text-xs">
+             <div class="mx-3 text-sm font-bold "> {{$id->Documents->name}} </div>
+             <div class="mx-3 text-xs mt-1">{{ucwords($id->Documents->documents_category->name)}}</div>
+             <div class="mx-3 text-xs mt-1">
 
                  @if($id->status == 0)
                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
@@ -46,7 +46,10 @@
                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-gray-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
                      Expiring </span> @endif
 
+
              </div>
+
          </div>@endforeach
      </div> @endif
+
  </div>

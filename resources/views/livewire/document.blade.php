@@ -239,9 +239,11 @@
             </x-slot>
 
             <x-slot name="content">
+          
             <div class="h-screen w-full">  
             <iframe src="{{$pdf}}"  class="w-full h-full"> </iframe>
             </div>
+          
             </x-slot>
 
             <x-slot name="footer">

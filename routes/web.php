@@ -25,6 +25,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/contractors', function ()
     return view('contractors');
 })->name('contractors');
 
+Route::middleware(['auth:sanctum', 'verified'])->get('/contractors/documents-review', function () {
+    return view('documents-review');
+})->name('documents-review');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/technicians', function () {
     return view('technicians');
 })->name('technicians');

@@ -270,33 +270,74 @@
 
 
                     <div class="text-gray-700">
-                        <div class="grid md:grid-cols-4 text-sm"> @foreach ($documents as $id)
+                        <div class="grid md:grid-cols-3 text-sm"> @foreach ($documents as $id)
                             <div class="grid grid-cols-1">
                                 <div class="text-gray-600 text-sm font-bold "> {{$id->Documents->name}} </div>
                                 <div class="text-gray-500 text-xs">{{ucwords($id->Documents->documents_category->name)}}</div>
                                 <div class="text-gray-500 text-xs">
+                                    <p class="text-xs"> Validity: {{ \Carbon\Carbon::parse($id->expiration)->format('j F, Y') }} </p>
+                                </div>
+                                <div class="text-gray-500 text-xs">
 
                                     @if($id->status == 0)
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
-                                        For Review </span>
+                                    <div class="flex no-wrap"> <a href="https://drive.google.com/uc?export=download&id={{$id->file_path}}">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
+                                                For Review
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 ml-1" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                                                </svg>
+                                                </svg>
+
+                                        </a> </div>
 
                                     @endif
 
                                     @if($id->status == 1)
+                                    <div class="flex no-wrap"> <a href="https://drive.google.com/uc?export=download&id={{$id->file_path}}">
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
-                                        Approved </span> @endif
+                                        Approved  <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 ml-1" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                                                </svg>
+                                                </svg>
+
+                                        </a> </div>
+
+                                    @endif
 
                                     @if($id->status == 2)
+                                    <div class="flex no-wrap"> <a href="https://drive.google.com/uc?export=download&id={{$id->file_path}}">
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
-                                        Rejected </span> @endif
+                                        Rejected<svg xmlns="http://www.w3.org/2000/svg" class="mt-1 ml-1" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                                                </svg>
+                                                </svg>
+
+                                        </a> </div>
+                                    @endif
+
 
                                     @if($id->status == 3)
+                                    <div class="flex no-wrap"> <a href="https://drive.google.com/uc?export=download&id={{$id->file_path}}">
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
-                                        Expired </span> @endif
+                                        Expired <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 ml-1" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                                                </svg>
+                                                </svg>
+
+                                        </a> </div>
+                                    @endif
 
                                     @if($id->status == 4)
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-gray-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
-                                        Expiring </span> @endif
+                                    <div class="flex no-wrap"> <a href="https://drive.google.com/uc?export=download&id={{$id->file_path}}">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
+                                        Expiring <svg xmlns="http://www.w3.org/2000/svg" class="mt-1 ml-1" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                                                </svg>
+                                                </svg>
+
+                                        </a> </div>
+                                    @endif
+
 
                                 </div>
                             </div>@endforeach
@@ -560,60 +601,62 @@
                 <x-jet-input-error for="contractordetailsinfo.documents_id" class="mt-2" />
             </div>
 
-            
-            <div class="py-4 pr-2"
-                    x-data="{ isUploading: false, progress: 0 }"
-                    x-on:livewire-upload-start="isUploading = true"
-                    x-on:livewire-upload-finish="isUploading = false"
-                    x-on:livewire-upload-error="isUploading = false"
-                    x-on:livewire-upload-progress="progress = $event.detail.progress"
-                    >                    
-                    <x-jet-label for="contractordetailsinfo.file_path" value="{{ __('File') }}" />
-                    <input id="contractordetailsinfo.file_path" class="mt-2 text-xs text-gray-600 content-center" type="file" name="contractordetailsinfo.file_path" required wire:model.defer="contractordetailsinfo.file_path" >
-                    <x-jet-input-error for="contractordetailsinfo.file_path" class="mt-2" />
+
+            <div class="py-4 pr-2" x-data="{ isUploading: false, progress: 0 }" x-on:livewire-upload-start="isUploading = true" x-on:livewire-upload-finish="isUploading = false" x-on:livewire-upload-error="isUploading = false" x-on:livewire-upload-progress="progress = $event.detail.progress">
+                <x-jet-label for="contractordetailsinfo.file_path" value="{{ __('File') }}" />
+                <input id="contractordetailsinfo.file_path" class="mt-2 text-xs text-gray-600 content-center" type="file" name="contractordetailsinfo.file_path" required wire:model.defer="contractordetailsinfo.file_path">
+                <x-jet-input-error for="contractordetailsinfo.file_path" class="mt-2" />
 
 
-                        <!-- Progress Bar -->
-                        <div x-show="isUploading">
-                            <progress max="100" x-bind:value="progress"></progress>
-                        </div>
-                    </div>
+                <!-- Progress Bar -->
+                <div x-show="isUploading">
+                    <progress max="100" x-bind:value="progress"></progress>
+                </div>
+            </div>
+            <div class="">
+                <x-jet-label for="contractordetailsinfo.expiration" value="{{ __('Expiration') }}" />
+                <input type="date" class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" required wire:model.defer="contractordetailsinfo.expiration">
+                <x-jet-input-error for="contractordetailsinfo.expiration" class="mt-2" />
+            </div>
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 mt-3"> Note: Disregard if document does not have an expiration </span>
+
             <hr class="mt-2 mb-2">
             <div>
-            <x-jet-label class="font-bold" value="{{ __('My Documents') }}" />
-               @foreach ($documents as $id)
-                <div class="px-2 inline-flex text-s leading-5 font-semibold rounded-full bg-indigo-600 text-white mt-3 transition duration-500 ease-in-out transform hover:-translate-y-1">  {{$id->Documents->name}} 
+                <x-jet-label class="font-bold" value="{{ __('My Documents') }}" />
+                @foreach ($documents as $id)
+                <div class="px-2 inline-flex text-s leading-5 font-semibold rounded-full bg-indigo-600 text-white mt-3 transition duration-500 ease-in-out transform hover:-translate-y-1"> {{$id->Documents->name}}
 
                     <button type="submit" wire:click="confirmRemoveDocument( {{$id->id}})">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 1 20 20" fill="currentColor" class="text-white h-4 w-4 fill-current">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
                         </svg>
                     </button>
-                  
+
                 </div>
-                <p class="text-xs px-2  leading-5 "> {{ucwords($id->Documents->documents_category->name)}} 
-                @if($id->status == 0)
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
-                                        For Review </span>
+                <p class="text-xs px-2  leading-5 "> {{ucwords($id->Documents->documents_category->name)}}
+                    @if($id->status == 0)
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
+                        For Review </span>
 
-                                    @endif
+                    @endif
 
-                                    @if($id->status == 1)
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
-                                        Approved </span> @endif
+                    @if($id->status == 1)
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
+                        Approved </span> @endif
 
-                                    @if($id->status == 2)
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
-                                        Rejected </span> @endif
+                    @if($id->status == 2)
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
+                        Rejected </span> @endif
 
-                                    @if($id->status == 3)
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
-                                        Expired </span> @endif
+                    @if($id->status == 3)
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
+                        Expired </span> @endif
 
-                                    @if($id->status == 4)
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-gray-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
-                                        Expiring </span> @endif  </p>
-                @endforeach 
+                    @if($id->status == 4)
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-gray-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
+                        Expiring </span> @endif
+                </p>
+                @endforeach
 
             </div>
         </x-slot>

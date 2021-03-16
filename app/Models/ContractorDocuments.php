@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Scopes\ActiveUser;
+
 
 class ContractorDocuments extends Model
 {
@@ -14,11 +16,17 @@ class ContractorDocuments extends Model
         'contractors_id',
         'status',
         'file_path',
+        'expiration'
     ];
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new ActiveUser);
+    }
 
     public function Contractors()
     {
-        return $this->belongsTo(Contractors::class, 'id' , 'contractors_id');
+        return $this->belongsTo(Contractors::class, 'contractors_id');
     }
 
     public function Documents()

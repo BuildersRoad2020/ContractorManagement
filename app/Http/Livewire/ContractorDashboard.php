@@ -183,22 +183,16 @@ class ContractorDashboard extends Component
 
     public function addDocuments()
     {
-
-        $files = Storage::disk("google")->listContents(); //get the files uploaded in google drive
-        usort($files, function ($a, $b) {
-            return $a['timestamp'] <=> $b['timestamp'];
-        });
-        $FILEID = end($files);
-        dd($FILEID);
-
-
+ 
         $contractors = Contractors::with('User')->where('users_id', auth()->user()->id)->select('id', 'name')->first();
         $validatedData = $this->validate([
             'contractordetailsinfo.documents_id' => ['required'],
             'contractordetailsinfo.file_path' => ['nullable', 'mimes:pdf', 'max:2000'],
+            'contractordetailsinfo.expiration' => 'nullable|date|after:tomorrow',
         ]);
         $documents = new ContractorDocuments;
         $documents->documents_id = $this->contractordetailsinfo['documents_id'];
+        $documents->expiration = $this->contractordetailsinfo['expiration'];
         $documents->contractors_id = $contractors->id;
 
         $documentstable = Documents::where('id', $this->contractordetailsinfo['documents_id'])->pluck('name')->first();

@@ -24,6 +24,10 @@
                         {{ __('Technicians') }}
                     </x-jet-nav-link>
                     @endcan
+
+                    <x-jet-nav-link href="{{ route('documents-review') }}" :active="request()->routeIs('documents-review')">
+                        {{ __('Review') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
@@ -172,6 +176,12 @@
      
             <x-jet-responsive-nav-link href="{{ route('technicians') }}" :active="request()->routeIs('technicians')">
                 {{ __('Technicians') }}
+            </x-jet-responsive-nav-link>
+            @endcan
+
+            @can('admin', App\Models\Users::class)
+            <x-jet-responsive-nav-link href="{{ route('documents-review') }}" :active="request()->routeIs('documents-review')">
+                {{ __('Review') }}
             </x-jet-responsive-nav-link>
             @endcan
         </div>

@@ -23,10 +23,12 @@ class ContractorSkillList extends Component
         $skills = Contractor_Skills::where('contractors_id', $this->contractor)->with('Skills')->get();
         $documents = ContractorDocuments::where('contractors_id', $this->contractor)->with('Documents')->get();
 
-    //  dd(count($skills));
+
         return view('livewire.contractor-skill-list', [
             'skills' => $skills,
             'documents' => $documents,
         ]);
     }
+
+ 
 }

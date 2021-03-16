@@ -97,6 +97,7 @@ class Document extends Component
         $this->confirmView = true;
         $this->pdf = "https://drive.google.com/file/d/" . $id->file_path ."/preview?usp=drivesdk" ;
     }
+    
 
         //Edit Document
     public function confirmDocumentEdit(Documents $id) {

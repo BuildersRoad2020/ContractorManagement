@@ -159,4 +159,5 @@ class Contractors extends Component
         $this->confirmingContractorDeletion = false;
         session()->flash('message', 'Contractor has been archived');
     }
+
 }
