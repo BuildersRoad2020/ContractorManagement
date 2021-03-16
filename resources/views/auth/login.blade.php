@@ -26,10 +26,11 @@
                         {{ __('Technicians') }}
                     </x-jet-nav-link>
                     @endcan
-
+                    @can('admin', App\Models\Users::class)
                     <x-jet-nav-link href="{{ route('documents-review') }}" :active="request()->routeIs('documents-review')">
                         {{ __('Review') }}
                     </x-jet-nav-link>
+                    @endcan
                 </div>
             </div>
 
