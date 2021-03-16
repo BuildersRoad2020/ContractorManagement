@@ -97,8 +97,21 @@
             <div class="sm:grid sm:grid-cols-3 sm:gap-2 sm:px-6">
             <dt class="text-sm font-medium text-gray-500"> Email:  </dt>
             <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">  {{$email}} </dd>
+            <dt class="text-sm font-medium text-gray-500"> Phone:  </dt>
+            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">    {{$phone}} </dd>
             <dt class="text-sm font-medium text-gray-500"> Contractor:  </dt>
             <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">    {{$contractors_id}} </dd>
+            <dt class="text-sm font-medium text-gray-500"> Address:  </dt>
+            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">   {{$address}} </dd>
+            <dt class="text-sm font-medium text-gray-500"> City:  </dt>
+            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">  {{$city}} </dd>
+            <dt class="text-sm font-medium text-gray-500"> State:  </dt>
+            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">   {{$state}} </dd>
+            <dt class="text-sm font-medium text-gray-500"> Country:  </dt>
+            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">   {{$country}} </dd>
+            <dt class="text-sm font-medium text-gray-500"> POSTCODE:  </dt>
+            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">   {{$postcode}} </dd>
+
             </div>
            
               

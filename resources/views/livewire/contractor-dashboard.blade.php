@@ -229,8 +229,8 @@
                     </div>
 
                     <div class="grid grid-cols-0 md:auto-cols-max md:grid-flow-col">
-                        @foreach($skills as $skill)
-                        <div class="grid grid-cols-1">
+                       
+                        <div class="grid grid-cols-5">  @foreach($skills as $skill)
                             <div class="px-1 py-1 font-semibold">
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-indigo-100 text-indigo-800 transition duration-500 ease-in-out transform hover:-translate-y-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -238,9 +238,9 @@
                                     </svg>
                                     {{$skill->skills->name}} </span>
 
-                            </div>
+                            </div>   @endforeach
                         </div>
-                        @endforeach
+                      
 
 
                     </div>
@@ -288,7 +288,7 @@
                                                 </svg>
                                                 </svg>
 
-                                        </a> </div>
+                                                </span>   </a> </div>
 
                                     @endif
 
@@ -300,7 +300,7 @@
                                                 </svg>
                                                 </svg>
 
-                                        </a> </div>
+                                    </span>  </a> </div>
 
                                     @endif
 
@@ -312,7 +312,7 @@
                                                 </svg>
                                                 </svg>
 
-                                        </a> </div>
+                                                </span>    </a> </div>
                                     @endif
 
 
@@ -324,7 +324,7 @@
                                                 </svg>
                                                 </svg>
 
-                                        </a> </div>
+                                                </span>   </a> </div>
                                     @endif
 
                                     @if($id->status == 4)
@@ -335,7 +335,7 @@
                                                 </svg>
                                                 </svg>
 
-                                        </a> </div>
+                                                </span>    </a> </div>
                                     @endif
 
 
@@ -545,7 +545,7 @@
 
         <x-slot name="content">
             <div class="mt-4">
-                <x-jet-label for="contractordetailsinfo.skills" value="{{ __('Payment Terms') }}" />
+                <x-jet-label for="contractordetailsinfo.skills" value="{{ __('Add Skills') }}" />
                 <select class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" wire:model="contractordetailsinfo.skills">
                     <option value="" selected>Select a skill</option>
                     @foreach($allskills as $skill)

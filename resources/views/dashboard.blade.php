@@ -11,6 +11,9 @@
             @can('vendor', App\Models\Users::class)
             <livewire:contractor-dashboard />
             @endcan
+            @can('technician', App\Models\Users::class)
+            <livewire:technician-dashboard />
+            @endcan
             </div>
         </div>
     </div>

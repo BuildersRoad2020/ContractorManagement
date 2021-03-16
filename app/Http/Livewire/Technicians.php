@@ -22,6 +22,12 @@ class Technicians extends Component
     public $name;
     public $email;
     public $contractors_id;
+    public $address;
+    public $city;
+    public $state;
+    public $country;
+    public $phone;
+    public $postcode;
 
 
     public $q; //searchbox
@@ -32,6 +38,7 @@ class Technicians extends Component
 
     public function render()
     {
+        $this->authorize('adminvendor', App\Models\Users::class);
         $users = auth()->user()->Roles()->pluck('id')->toarray();
         foreach ($users as $key => $role_id) {
             if ($role_id == 1 ) {   //Search all technicians and Contractors Table
@@ -134,11 +141,25 @@ class Technicians extends Component
     public function view($id)
     {
         $this->viewTechnician = $id;
-        $technician = ModelsTechnician::where('id', $this->viewTechnician)->with('User')->with('Contractors')->first();
+        $technician = ModelsTechnician::where('id', $this->viewTechnician)->first();
         $this->name = $technician->name;
         $this->email = $technician->User->email;
         $this->contractors_id = $technician->Contractors->name;
+        $this->address = $technician->address;
+        $this->postcode = $technician->postcode;
+        $this->phone = $technician->phone;
+          
+        if($technician->Cities != null) {
+            $this->city = $technician->Cities->name;
+        }
+        
+        if($technician->States != null) {
+            $this->state = $technician->States->name;
+        }
 
+        if($technician->Countries != null) {
+            $this->country = $technician->Countries->name;  
+        }  
     }
 
 }
