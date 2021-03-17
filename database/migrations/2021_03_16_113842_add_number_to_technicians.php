@@ -14,12 +14,12 @@ class AddNumberToTechnicians extends Migration
     public function up()
     {
         Schema::table('technicians', function (Blueprint $table) {
-            $table->string('address');
-            $table->integer('city');
-            $table->integer('state');
-            $table->integer('country');
-            $table->string('postcode');
-            $table->string('phone');
+            $table->string('address')->nullable();
+            $table->integer('city')->nullable();
+            $table->integer('state')->nullable();
+            $table->integer('country')->nullable();
+            $table->string('postcode')->nullable();
+            $table->string('phone')->nullable();
         });
     }
 

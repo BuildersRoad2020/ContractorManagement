@@ -93,7 +93,6 @@
             </x-slot>
 
             <x-slot name="content">
-
             <div class="sm:grid sm:grid-cols-3 sm:gap-2 sm:px-6">
             <dt class="text-sm font-medium text-gray-500"> Email:  </dt>
             <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">  {{$email}} </dd>
@@ -113,8 +112,9 @@
             <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2">   {{$postcode}} </dd>
 
             </div>
-           
-              
+        
+            <livewire:technician-skill-list :id="$viewTechnician" :key="$viewTechnician" wire:model.defer />
+ 
              
             </x-slot>
 

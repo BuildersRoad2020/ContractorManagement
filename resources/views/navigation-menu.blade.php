@@ -15,11 +15,12 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                    @can('adminvendor', App\Models\Users::class)
+                    @can('admin', App\Models\Users::class)
                     <x-jet-nav-link href="{{ route('contractors') }}" :active="request()->routeIs('contractors')">
                         {{ __('Contractors') }}
                     </x-jet-nav-link>
-
+                   @endcan
+                    @can('adminvendor', App\Models\Users::class)
                     <x-jet-nav-link href="{{ route('technicians') }}" :active="request()->routeIs('technicians')">
                         {{ __('Technicians') }}
                     </x-jet-nav-link>
@@ -171,11 +172,12 @@
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
 
-            @can('adminvendor', App\Models\Users::class)
+            @can('admin', App\Models\Users::class)
             <x-jet-responsive-nav-link href="{{ route('contractors') }}" :active="request()->routeIs('contractors')">
                 {{ __('Contractors') }}
             </x-jet-responsive-nav-link>
-     
+            @endcan
+            @can('adminvendor', App\Models\Users::class)
             <x-jet-responsive-nav-link href="{{ route('technicians') }}" :active="request()->routeIs('technicians')">
                 {{ __('Technicians') }}
             </x-jet-responsive-nav-link>

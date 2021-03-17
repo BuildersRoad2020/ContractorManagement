@@ -267,8 +267,6 @@
                         </div>
                     </div>
 
-
-
                     <div class="text-gray-700">
                         <div class="grid md:grid-cols-3 text-sm"> @foreach ($documents as $id)
                             <div class="grid grid-cols-1">
@@ -337,8 +335,6 @@
 
                                                 </span>    </a> </div>
                                     @endif
-
-
                                 </div>
                             </div>@endforeach
                         </div>
@@ -593,7 +589,7 @@
             <div class="mt-4">
                 <x-jet-label for="contractordetailsinfo.documents_id" value="{{ __('Document Type') }}" />
                 <select class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" wire:model="contractordetailsinfo.documents_id">
-                    <option value="" disabled selected>Select a document</option>
+                    <option value="" selected>Select a document</option>
                     @foreach($alldocuments as $skill)
                     <option value="{{$skill->id}}"> {{$skill->name}} </option>
                     @endforeach

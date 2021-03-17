@@ -52,4 +52,9 @@ class Technicians extends Model
     {
         return $this->belongsToMany(Skills::class, 'technician__skills', 'technicians_id','skills_id');
     } 
+
+    public function TechnicianDocuments()
+    {
+        return $this->belongsToMany(Documents::class, 'technician_documents', 'technicians_id','documents_id');
+    } 
 }

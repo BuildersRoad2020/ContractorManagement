@@ -192,7 +192,10 @@ class ContractorDashboard extends Component
         ]);
         $documents = new ContractorDocuments;
         $documents->documents_id = $this->contractordetailsinfo['documents_id'];
-        $documents->expiration = $this->contractordetailsinfo['expiration'];
+
+        if($this->contractordetailsinfo['expiration'] !== "" ) {
+            $documents->expiration = $this->contractordetailsinfo['expiration'];
+        }
         $documents->contractors_id = $contractors->id;
 
         $documentstable = Documents::where('id', $this->contractordetailsinfo['documents_id'])->pluck('name')->first();
