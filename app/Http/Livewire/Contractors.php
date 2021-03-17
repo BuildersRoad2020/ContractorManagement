@@ -117,8 +117,9 @@ class Contractors extends Component
         foreach($required as $id => $key) {
             $missing_id[] = ContractorDocuments::where('contractors_id', $this->viewContractor)->where('documents_id', $key)->where('status', '1')->pluck('documents_id')->first();
         }
-        $missing = array_diff($required, $missing_id);
         
+        $missing = array_diff($required, $missing_id);
+        dd($missing_id);
         if($missing == null) {
             $update = ModelsContractors::where('id', $this->viewContractor)->first();
             $update->status = '1';
