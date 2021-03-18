@@ -112,6 +112,7 @@ class Contractors extends Component
     public function approveContractor($id)
     {
         $this->viewContractor = $id;
+        $missing_id = [];
 
         $required = Documents::where('required', 1)->pluck('id')->toarray(); //get required document IDs
         foreach($required as $id => $key) {
@@ -119,7 +120,7 @@ class Contractors extends Component
         }
         
         $missing = array_diff($required, $missing_id);
-        dd($missing_id);
+        //dd($missing);
         if($missing == null) {
             $update = ModelsContractors::where('id', $this->viewContractor)->first();
             $update->status = '1';
