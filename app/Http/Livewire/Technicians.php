@@ -52,7 +52,7 @@ class Technicians extends Component
                         });
                     })
                     ->paginate(9);
-            }
+            }   
 
             if ($role_id == 2) {               //search Technicians table only assigned to this contractor
                 $id = auth()->user()->id;       
@@ -73,6 +73,7 @@ class Technicians extends Component
             'checkrole' => Auth()->user()->Roles()->where('id', 1)->pluck('id')->first(),
             'adminlist' =>  Contractors::get(),
             'contractorlist' => Contractors::where('users_id', auth()->user()->id)->get(),
+         
         ]);
     }
 

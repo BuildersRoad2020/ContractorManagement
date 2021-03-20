@@ -6,11 +6,13 @@ use App\Models\Cities;
 use App\Models\Contractor_Skills;
 use App\Models\ContractorDetails;
 use App\Models\ContractorDocuments;
+use App\Models\ContractorRates;
 use App\Models\Contractors;
 use App\Models\Countries;
 use App\Models\Documents;
 use App\Models\Skills;
 use App\Models\States;
+
 
 use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -26,11 +28,13 @@ class ContractorDashboard extends Component
     use WithFileUploads;
     public $contractorinfo;
     public $contractordetailsinfo;
+    public $expiration;
 
     public $updatedetails = false; //update contractor details
     public $updatefinancial = false; //update contractor financial details
     public $updateskills = false; //update skills 
     public $addDocuments = false;
+    public $addModal = false;
 
     public $SelectedCountry = null;
     public $SelectedState = null;
@@ -53,6 +57,7 @@ class ContractorDashboard extends Component
         'contractordetailsinfo.email_secondary' => ['nullable', 'email'],
     ];
 
+    protected $listeners = ['added' => 'render'];
 
     public function render()
     {
@@ -183,19 +188,20 @@ class ContractorDashboard extends Component
 
     public function addDocuments()
     {
- 
+       
         $contractors = Contractors::with('User')->where('users_id', auth()->user()->id)->select('id', 'name')->first();
         $validatedData = $this->validate([
             'contractordetailsinfo.documents_id' => ['required'],
             'contractordetailsinfo.file_path' => ['nullable', 'mimes:pdf', 'max:2000'],
-            'contractordetailsinfo.expiration' => 'nullable|date|after:tomorrow',
+            'expiration' => 'nullable|date|after:tomorrow',
         ]);
         $documents = new ContractorDocuments;
         $documents->documents_id = $this->contractordetailsinfo['documents_id'];
 
-        if($this->contractordetailsinfo['expiration'] !== "" ) {
-            $documents->expiration = $this->contractordetailsinfo['expiration'];
+        if($this->expiration !== "" ) {
+            $documents->expiration = $this->expiration;
         }
+
         $documents->contractors_id = $contractors->id;
 
         $documentstable = Documents::where('id', $this->contractordetailsinfo['documents_id'])->pluck('name')->first();
@@ -221,8 +227,10 @@ class ContractorDashboard extends Component
     public function confirmRemoveDocument(ContractorDocuments $id)
     {
         //  dd($id);
+        $this->emit('added');
         $id->delete();
         $this->reset('addDocuments');
         $this->addDocuments = true;
     }
+
 }

@@ -40,6 +40,10 @@
                     </svg>
                 </button>
             </div>
+
+
+
+
             <div class="mt-2 mb-2">
                 <label class="inline-flex items-center">
                     <select class="border border-gray-300 rounded-full text-xs text-gray-600 h-8 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none" wire:model="status">
@@ -51,10 +55,64 @@
             </div>
         </div>
 
+        <div class="flex justify-between">
+            <div class="flex justify-center flex-wrap gap-x-4 w-full py-2 rounded-lg bg-white border border-gray-100 dark:bg-gray-900 dark:border-gray-800">
+                <div class="flex flex-row items-center justify-between w-1/4 py-1 px-2 rounded  border-2 border-light-blue-500 border-opacity-100">
+                    <div class="flex flex-col">
+                        <div class="text-xs uppercase font-bold text-gray-500">
+                            Total
+                        </div>
+                        <div class="text-xl font-bold">
+                            @if(count($contractors) > 0 ) {{count($contractors)}} @endif @if(count($contractors) == 0 ) 0 @endif
+                        </div>
+                    </div>
+                    <svg class="stroke-current text-gray-500" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2">
+                        </path>
+                        <circle cx="9" cy="7" r="4">
+                        </circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87">
+                        </path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75">
+                        </path>
+                    </svg>
+                </div>
+
+                <div class="flex flex-row items-center justify-between w-1/4 py-1 px-2 rounded  border-2 border-green-500 border-opacity-50">
+                    <div class="flex flex-col">
+                        <div class="text-xs uppercase font-bold text-green-500">
+                            Approved
+                        </div>
+                        <div class="text-xl font-bold text-green-500">
+                          {{$approved}}
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-green-500" fill="none" height="24" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+
+                <div class="flex flex-row items-center justify-between w-1/4 py-1 px-2 rounded  border-2 border-red-500 border-opacity-50">
+                    <div class="flex flex-col">
+                        <div class="text-xs uppercase font-bold text-red-500">
+                        onHold
+                        </div>
+                        <div class="text-xl font-bold text-red-500">
+                        {{$onhold}}
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-red-500" fill="none" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </div>
+
+            </div>
+        </div>
+
         <table class="border-collapse w-full">
             <thead>
                 <tr>
-       
+
                     <th class="p-3 font-bold bg-gray-100 text-gray-600 border border-gray-300 hidden lg:table-cell">
                         Contractor Name
                     </th>
@@ -137,49 +195,49 @@
                 <dt class="text-sm font-medium text-gray-500"> Post Code : </dt>
                 <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$postcode}} </dd>
             </div>
-           
+
             <h2 class="text-gray-800 font-semibold ml-2 mt-2"> Financial Details </h2>
             <hr class="w-full mt-2 mb-2">
 
             <div class="sm:grid sm:grid-cols-3 sm:gap-2 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500"> Payment Terms: </dt>
-            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$terms}} </dd>
-            <dt class="text-sm font-medium text-gray-500"> Currency: </dt>
-            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$currency}} </dd>
-            <dt class="text-sm font-medium text-gray-500"> Bank: </dt>
-            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$bankname}} </dd>    
-            <dt class="text-sm font-medium text-gray-500"> Branch: </dt>
-            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$branch}} </dd>     
-            <dt class="text-sm font-medium text-gray-500"> Account Name: </dt>
-            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$accountname}} </dd>        
-            <dt class="text-sm font-medium text-gray-500"> Account Number: </dt>
-            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$accountnumber}} </dd> 
-            <dt class="text-sm font-medium text-gray-500"> BSB: </dt>
-            <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$bsb}} </dd> 
+                <dt class="text-sm font-medium text-gray-500"> Payment Terms: </dt>
+                <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$terms}} </dd>
+                <dt class="text-sm font-medium text-gray-500"> Currency: </dt>
+                <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$currency}} </dd>
+                <dt class="text-sm font-medium text-gray-500"> Bank: </dt>
+                <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$bankname}} </dd>
+                <dt class="text-sm font-medium text-gray-500"> Branch: </dt>
+                <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$branch}} </dd>
+                <dt class="text-sm font-medium text-gray-500"> Account Name: </dt>
+                <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$accountname}} </dd>
+                <dt class="text-sm font-medium text-gray-500"> Account Number: </dt>
+                <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$accountnumber}} </dd>
+                <dt class="text-sm font-medium text-gray-500"> BSB: </dt>
+                <dd class="mt-1 text-xs text-gray-900 sm:mt-0 sm:col-span-2"> {{$bsb}} </dd>
             </div>
 
-  
+
             <livewire:contractor-skill-list :id="$viewContractor" :key="$viewContractor" wire:model.defer />
-         
+
 
 
         </x-slot>
 
         <x-slot name="footer">
 
-                @if($contractorstatus == 0)
-                <x-jet-button class="ml-2" wire:click="approveContractor({{ $viewContractor }})" wire:loading.attr="disabled">
-                {{ __('Approve Account') }} 
-                </x-jet-button> @endif
+            @if($contractorstatus == 0)
+            <x-jet-button class="ml-2" wire:click="approveContractor({{ $viewContractor }})" wire:loading.attr="disabled">
+                {{ __('Approve Account') }}
+            </x-jet-button> @endif
 
-                @if($contractorstatus == 1)
-                <x-jet-danger-button class="ml-2" wire:click="denyContractor({{ $viewContractor }})" wire:loading.attr="disabled">
-                {{ __('Hold Contractor') }} 
-                </x-jet-danger-button> @endif
+            @if($contractorstatus == 1)
+            <x-jet-danger-button class="ml-2" wire:click="denyContractor({{ $viewContractor }})" wire:loading.attr="disabled">
+                {{ __('Hold Contractor') }}
+            </x-jet-danger-button> @endif
 
-                <x-jet-secondary-button wire:click="$set('viewContractor', false)" wire:loading.attr="disabled">
-                    {{ __('Close') }}
-                </x-jet-secondary-button>
+            <x-jet-secondary-button wire:click="$set('viewContractor', false)" wire:loading.attr="disabled">
+                {{ __('Close') }}
+            </x-jet-secondary-button>
 
         </x-slot>
     </x-jet-dialog-modal>

@@ -2,14 +2,15 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\ContractorDocuments;
 use Livewire\Component;
 use App\Models\Documents;
 use App\Models\Documents_Category;
+use App\Models\TechnicianDocuments;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
-
 
 
 class Document extends Component
@@ -141,7 +142,20 @@ class Document extends Component
     public function DocumentDelete(Documents $id) {
 
         $deleteData = Documents::find($id->id);
-        $deleteData->delete();
+        $deleteData->status = '6';
+        $deleteData->save();
+
+        $contractordocs = ContractorDocuments::where('documents_id', $deleteData->id)->pluck('id');
+        $techniciandocs = TechnicianDocuments::where('documents_id', $deleteData->id)->pluck('id');
+        
+        foreach($contractordocs as $id => $key) {
+            $status = ContractorDocuments::where('id', $key)->update(['status' => '6']);
+        }
+
+        foreach($techniciandocs as $id => $key) {
+            $status = TechnicianDocuments::where('id', $key)->update(['status' => '6']);
+        }
+ 
         $this->confirmDelete = false;
         $this->documents__category_id = null;
         $this->required = null;

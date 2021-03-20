@@ -32,6 +32,11 @@ class Contractors extends Model
         return $this->hasMany(Technicians::class, 'contractors_id', 'id');
     }
 
+    public function ContractorRates()
+    {
+        return $this->hasMany(ContractorRates::class, 'contractors_id', 'id');
+    }
+
     public function ContractorDetails() 
     {
         return $this->hasOne(ContractorDetails::class, 'contractors_id', 'id');

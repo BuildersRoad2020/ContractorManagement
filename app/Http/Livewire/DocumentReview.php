@@ -49,7 +49,8 @@ class DocumentReview extends Component
             return $query->where('status', $this->status);
         })
         ->paginate('15');
-        
+          
+       // dd($documents);
        
         return view('livewire.document-review', [
             'documents' => $documents,

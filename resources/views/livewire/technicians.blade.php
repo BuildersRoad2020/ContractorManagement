@@ -25,6 +25,28 @@
                 </button>
             </div>
 
+            <div class="flex flex-wrap w-1/4 gap-x-2  rounded border-opacity-25">
+                    <div class="flex flex-col">
+                        <div class="text-xs uppercase font-bold text-gray-500">
+                            Total
+                        </div>
+                        <div class="text-xl font-bold">
+                            @if(count($technicians) > 0 ) {{count($technicians)}} @endif @if(count($technicians) == 0 ) 0 @endif
+                        </div>
+                    </div>
+                    <svg class="stroke-current text-gray-500" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2">
+                        </path>
+                        <circle cx="9" cy="7" r="4">
+                        </circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87">
+                        </path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75">
+                        </path>
+                    </svg>
+                </div>
+
+
             <div class="mt-2 mb-2 pl-2 relative ">
                 <x-jet-button wire:click="confirmTechnicianAdd" wire:loading.attr="disabled">
                     {{ __('Add Technician') }}
@@ -33,6 +55,8 @@
 
 
         </div>
+
+  
 
         <table class="border-collapse w-full">
             <thead>

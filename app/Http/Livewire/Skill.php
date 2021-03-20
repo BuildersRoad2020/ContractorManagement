@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Contractor_Skills;
+use App\Models\Technician_Skills;
+
 use App\Models\Skills;
 use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -48,10 +50,15 @@ class Skill extends Component
         if($ContractorSkills != null) {
             $ContractorSkills->delete();
         }
+
+        $TechnicianSkills = Technician_Skills::where('skills_id', $id->id);
+        if($TechnicianSkills != null) {
+            $TechnicianSkills->delete();
+        }
  
         $id->delete();
         $this->confirm = false;
-        session()->flash('message', 'Skills have been deleted'); 
+        session()->flash('message', 'Skills have been removed'); 
 
     }
 }

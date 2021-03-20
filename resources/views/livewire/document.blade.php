@@ -130,7 +130,6 @@
                         </th>
                     </tr>
 
-
                 </thead>
                 <tbody>
                 </tbody>
@@ -160,10 +159,7 @@
                             {{ __('VIEW DOCUMENT') }}
                         </x-jet-button>
                         @endif
-
-                      
-                       
-               
+           
                       
                     </td>
 
@@ -257,39 +253,13 @@
 
 
         <!--Delete Document Modal -->
-        <x-jet-dialog-modal wire:model="confirmDelete">
+        <x-jet-confirmation-modal wire:model="confirmDelete">
             <x-slot name="title">
                 {{ __('Delete Document') }}
             </x-slot>
 
             <x-slot name="content">
-                <div>
-                    <x-jet-label for="name" value="{{ __('Name') }}" />
-                    <x-jet-input id="name" class="block mt-1 w-full rounded-full" type="text" name="name" required wire:model.defer="name" />
-                    <x-jet-input-error for="name" class="mt-2" />
-                </div>
-
-                <div class="mt-4 flex flex-wrap md:flex-wrap">
-                    <div>
-                        <x-jet-label for="documents__category_id" value="{{ __('Document Category') }}" />
-                        <select id="documents__category_id" class="border border-gray-300 rounded-full content-center text-xs text-gray-600 mt-2 h-10 w-full bg-white hover:border-gray-400 focus:outline-none appearance-none" name="documents__category_id" required wire:model.defer="documents__category_id" />
-                        <option value="" selected> Select Document Category </option>
-                        @foreach ($categories as $category)
-                        <option value="{{$category->id}}"> {{$category->name}} </option>
-                        @endforeach
-                        </select>
-                        <x-jet-input-error for="documents__category_id" class="mt-2" />
-                    </div>
-
-                    <div class="ml-2">
-                        <x-jet-label for="required" value="{{ __('Document Required?') }}" />
-                        <select id="required" class="border border-gray-300 rounded-full content-center text-xs text-gray-600 mt-2 h-10 w-full bg-white hover:border-gray-400 focus:outline-none appearance-none" name="required" required wire:model.defer="required" />
-                        <option value="0" selected> No </option>
-                        <option value="1"> Yes </option>
-                        </select>
-                        <x-jet-input-error for="required" class="mt-2" />
-                    </div>
-                </div>
+ 
             </x-slot>
 
             <x-slot name="footer">
@@ -302,7 +272,7 @@
                 </x-jet-secondary-button>
 
             </x-slot>
-        </x-jet-dialog-modal>        
+        </x-jet-confirmation-modal>        
 
         <div class="mt-2 p-2 sm:px-4">
             {{ $documents->links() }}

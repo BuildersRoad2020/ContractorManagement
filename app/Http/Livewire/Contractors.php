@@ -66,6 +66,8 @@ class Contractors extends Component
         ->paginate(10);
         return view('livewire.contractors', [
             'contractors' => $contractors,
+            'approved' => ModelsContractors::where('status', 1)->count(),
+            'onhold' => ModelsContractors::where('status', 0)->count(),
         ]);
     }
 
