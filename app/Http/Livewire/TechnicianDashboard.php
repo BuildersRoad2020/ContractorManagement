@@ -159,7 +159,7 @@ class TechnicianDashboard extends Component
         $documents = new TechnicianDocuments();
         $documents->documents_id = $this->technicianinfo['documents_id'];
 
-        if($this->technicianexpiration !== "" ) {
+        if($this->technicianexpiration != null ) {
             $documents->expiration = $this->technicianexpiration;
         }
 

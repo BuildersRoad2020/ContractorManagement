@@ -192,7 +192,7 @@
                                 <div class="text-gray-600 text-sm font-bold "> {{$id->Documents->name}} </div>
                                 <div class="text-gray-500 text-xs">{{ucwords($id->Documents->documents_category->name)}}</div>
                                 <div class="text-gray-500 text-xs">
-                                    <p class="text-xs"> Validity: {{ \Carbon\Carbon::parse($id->expiration)->format('j F, Y') }} </p>
+                                @if($id->expiration != null)   <p class="text-xs"> Validity:  {{ \Carbon\Carbon::parse($id->expiration)->format('j F, Y') }}</p>  @endif
                                 </div>
                                 <div class="text-gray-500 text-xs">
 
