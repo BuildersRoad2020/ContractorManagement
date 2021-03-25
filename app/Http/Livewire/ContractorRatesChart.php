@@ -105,7 +105,7 @@ class ContractorRatesChart extends Component
                     $type = $data->first()->state;
                     $title = States::where('id', $type)->pluck('name')->first();
                   //  dd($title);
-                    $value = $data->count('contractors_id');
+                    $value = $data->unique('contractors_id')->count('contractors_id');
 
                     return $columnChartModel->addColumn($title, $value, $this->colors[$type]);
                 },
