@@ -36,6 +36,7 @@ class TechnicianDashboard extends Component
     public $cities = null;
 
     public $technicianinfo;
+    public $technicianexpiration;
 
     public $rules = [
         'profile.name' => ['required'],
@@ -152,14 +153,14 @@ class TechnicianDashboard extends Component
         $validatedData = $this->validate([
             'technicianinfo.documents_id' => ['required'],
             'technicianinfo.file_path' => ['nullable', 'mimes:pdf', 'max:2000'],
-            'technicianinfo.expiration' => 'nullable|date|after:tomorrow',
+            'technicianexpiration' => 'nullable|date|after:tomorrow',
         ]);
 
         $documents = new TechnicianDocuments();
         $documents->documents_id = $this->technicianinfo['documents_id'];
 
-        if($this->technicianinfo['expiration'] !== "" ) {
-            $documents->expiration = $this->technicianinfo['expiration'];
+        if($this->technicianexpiration !== "" ) {
+            $documents->expiration = $this->technicianexpiration;
         }
 
         $documents->technicians_id = $technicians->id;

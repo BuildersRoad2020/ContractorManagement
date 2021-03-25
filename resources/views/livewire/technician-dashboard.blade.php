@@ -420,9 +420,9 @@
                     </div>
                 </div>
                 <div class="">
-                    <x-jet-label for="technicianinfo.expiration" value="{{ __('Expiration') }}" />
-                    <input type="date" class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" required wire:model.defer="technicianinfo.expiration">
-                    <x-jet-input-error for="technicianinfo.expiration" class="mt-2" />
+                    <x-jet-label for="technicianexpiration" value="{{ __('Expiration') }}" />
+                    <input type="date" class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" required wire:model.defer="technicianexpiration">
+                    <x-jet-input-error for="technicianexpiration" class="mt-2" />
                 </div>
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 mt-3"> Note: Disregard if document does not have an expiration </span>
 
