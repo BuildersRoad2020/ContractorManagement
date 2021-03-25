@@ -50,6 +50,11 @@ class DocumentReviewTechnician extends Component
        
         return view('livewire.document-review-technician', [
             'documents' => $documents,
+            'review' => TechnicianDocuments::where('status', 0)->count(),
+            'approved' => TechnicianDocuments::where('status', 1)->count(),
+            'rejected' => TechnicianDocuments::where('status', 2)->count(),
+            'expiring' => TechnicianDocuments::where('status', 4)->count(),    
+            'expired' => TechnicianDocuments::where('status', 3)->count(),   
         ]);
     }
 

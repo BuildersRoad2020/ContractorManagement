@@ -15,12 +15,85 @@
     </div>
     @endif
 
+    <div class="flex  justify-between mb-2 gap-x-12 sm:gap-x-1">
+        <div class="flex flex-wrap  w-auto rounded px-2 py-2 border-2 border-opacity-25">
+            <div class="flex flex-col">
+                <div class="text-xs uppercase font-bold text-grey-500">
+                    For Review
+                </div>
+                <div class="text-xl font-bold">
+                    {{$review}}
+                </div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-grey-500" fill="none" height="24" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            </svg>
+        </div>
+
+        <div class="flex flex-wrap w-auto rounded px-2 py-2 border-2 border-green-500 border-opacity-25">
+            <div class="flex flex-col">
+                <div class="text-xs uppercase font-bold text-green-500">
+                    Approved
+                </div>
+                <div class="text-xl text-green-500 font-bold">
+                    {{$approved}}
+                </div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-green-500" fill="none" height="24" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            </svg>
+        </div> 
+
+        <div class="flex flex-wrap w-auto rounded px-2 py-2 border-2 border-red-500 border-opacity-25">
+            <div class="flex flex-col">
+                <div class="text-xs uppercase font-bold text-red-500">
+                    Rejected
+                </div>
+                <div class="text-xl text-red-500 font-bold">
+                    {{$rejected}}
+                </div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-red-500" fill="none" height="24" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            </svg>
+        </div> 
+
+        <div class="flex flex-wrap w-auto rounded px-2 py-2 border-2 border-yellow-500 border-opacity-25">
+            <div class="flex flex-col">
+                <div class="text-xs uppercase font-bold text-yellow-500">
+                    Expiring
+                </div>
+                <div class="text-xl text-yellow-500 font-bold">
+                    {{$expiring}}
+                </div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-yellow-500" fill="none" height="24" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            </svg>
+        </div> 
+
+        <div class="flex flex-wrap w-auto rounded px-2 py-2 border-2 border-red-700 border-opacity-25">
+            <div class="flex flex-col">
+                <div class="text-xs uppercase font-bold text-red-700">
+                    Expired
+                </div>
+                <div class="text-xl text-red-700 font-bold">
+                    {{$expired}}
+                </div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-red-700" fill="none" height="24" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            </svg>
+        </div> 
+    </div>
+
     <div class="overflow-hidden sm:rounded-lg">
 
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Contractor Documents') }}
         </h2>
     </div>
+
 
     <div class="mt-1">
         <div class="flex justify-between">
@@ -32,6 +105,7 @@
                     </svg>
                 </button>
             </div>
+
             <div class="mt-2 mb-2">
                 <label class="inline-flex items-center">
                     <select class="border border-gray-300 rounded-full text-xs text-gray-600 h-8 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none" wire:model="status">

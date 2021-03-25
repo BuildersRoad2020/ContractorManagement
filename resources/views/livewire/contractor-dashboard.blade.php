@@ -1,6 +1,6 @@
 <div>
     @if($contractors != null)
-    <div wire:poll.1000ms>
+    <div>
         <div class="bg-gray-100">
             @if(session()->has('message'))
             <div class="fixed top-0 right-0 bg-opacity-0 ">
@@ -270,7 +270,7 @@
 
                             <div class="text-gray-700">
                                 <div class="grid md:grid-cols-3 text-sm"> @foreach ($documents as $id)
-                                    <div class="grid grid-cols-1">
+                                    <div class="grid grid-cols-1 mb-2">
                                         <div class="text-gray-600 text-sm font-bold "> {{$id->Documents->name}} </div>
                                         <div class="text-gray-500 text-xs">{{ucwords($id->Documents->documents_category->name)}}</div>
                                         <div class="text-gray-500 text-xs">
@@ -346,7 +346,7 @@
                         <div class="my-2"> </div>
                   
 
-                            <livewire:contractor-rates />
+                         
                         <!-- End of Contractor Skills section -->
                     </div>
                 </div>
@@ -431,21 +431,21 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-jet-label for="contractordetailsinfo.name_secondarycontact" value="{{ __('Secondary Contact') }}" />
-                        <x-jet-input id="contractordetailsinfo.name_secondarycontact" class="block mt-1 w-full" type="text" required wire:model.defer="contractordetailsinfo.name_secondarycontact" />
-                        <x-jet-input-error for="contractordetailsinfo.name_secondarycontact" class="mt-2" />
+                        <x-jet-label for="name_secondarycontact" value="{{ __('Secondary Contact') }}" />
+                        <x-jet-input id="name_secondarycontact" class="block mt-1 w-full" type="text" required wire:model.defer="name_secondarycontact" />
+                        <x-jet-input-error for="name_secondarycontact" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
-                        <x-jet-label for="contractordetailsinfo.phone_secondary" value="{{ __('Contact Number') }}" />
-                        <x-jet-input id="contractordetailsinfo.phone_secondary" class="block mt-1 w-full" type="text" required wire:model.defer="contractordetailsinfo.phone_secondary" />
-                        <x-jet-input-error for="contractordetailsinfo.phone_secondary" class="mt-2" />
+                        <x-jet-label for="phone_secondary" value="{{ __('Contact Number') }}" />
+                        <x-jet-input id="phone_secondary" class="block mt-1 w-full" type="text" required wire:model.defer="phone_secondary" />
+                        <x-jet-input-error for="phone_secondary" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
-                        <x-jet-label for="contractordetailsinfo.email_secondary" value="{{ __('Email') }}" />
-                        <x-jet-input id="contractordetailsinfo.email_secondary" class="block mt-1 w-full" type="email" required wire:model.defer="contractordetailsinfo.email_secondary" />
-                        <x-jet-input-error for="contractordetailsinfo.email_secondary" class="mt-2" />
+                        <x-jet-label for="email_secondary" value="{{ __('Email') }}" />
+                        <x-jet-input id="email_secondary" class="block mt-1 w-full" type="email" required wire:model.defer="email_secondary" />
+                        <x-jet-input-error for="email_secondary" class="mt-2" />
                     </div>
 
                 </x-slot>

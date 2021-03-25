@@ -42,6 +42,10 @@ class ContractorDashboard extends Component
     public $states = null;
     public $cities = null;
 
+    public $name_secondarycontact;
+    public $phone_secondary;
+    public $email_secondary;
+
     public $rules = [
         'contractorinfo.name' => ['required'],
         'contractordetailsinfo.address' => ['required'],
@@ -52,9 +56,9 @@ class ContractorDashboard extends Component
         'contractordetailsinfo.name_primarycontact' => ['required'],
         'contractordetailsinfo.phone_primary' => ['required', 'numeric'],
         'contractordetailsinfo.email_primary' => ['required', 'email'],
-        'contractordetailsinfo.name_secondarycontact' => ['nullable'],
-        'contractordetailsinfo.phone_secondary' => ['nullable', 'numeric'],
-        'contractordetailsinfo.email_secondary' => ['nullable', 'email'],
+        'name_secondarycontact' => ['nullable'],
+        'phone_secondary' => ['nullable', 'numeric'],
+        'email_secondary' => ['nullable', 'email'],
     ];
 
     protected $listeners = ['added' => 'render'];
@@ -100,6 +104,7 @@ class ContractorDashboard extends Component
 
     public function updateDetails()
     {
+      
         $this->validate();
         $contractors = Contractors::with('User')->where('users_id', auth()->user()->id)->select('id')->first();
         $contractors->name = $this->contractorinfo['name'];
@@ -113,9 +118,11 @@ class ContractorDashboard extends Component
         $contractor->name_primarycontact = $this->contractordetailsinfo['name_primarycontact'];
         $contractor->phone_primary = $this->contractordetailsinfo['phone_primary'];
         $contractor->email_primary = $this->contractordetailsinfo['email_primary'];
-        $contractor->name_secondarycontact = $this->contractordetailsinfo['name_secondarycontact'];
-        $contractor->phone_secondary = $this->contractordetailsinfo['phone_secondary'];
-        $contractor->email_secondary = $this->contractordetailsinfo['email_secondary'];
+
+        $contractor->name_secondarycontact = $this->name_secondarycontact;
+        $contractor->phone_secondary = $this->phone_secondary;
+        $contractor->email_secondary = $this->email_secondary;
+
         $contractor->save();
         $this->updatedetails = false;
         session()->flash('message', 'Details has been updated');
@@ -188,7 +195,7 @@ class ContractorDashboard extends Component
 
     public function addDocuments()
     {
-       
+
         $contractors = Contractors::with('User')->where('users_id', auth()->user()->id)->select('id', 'name')->first();
         $validatedData = $this->validate([
             'contractordetailsinfo.documents_id' => ['required'],
@@ -198,7 +205,7 @@ class ContractorDashboard extends Component
         $documents = new ContractorDocuments;
         $documents->documents_id = $this->contractordetailsinfo['documents_id'];
 
-        if($this->expiration !== "" ) {
+        if ($this->expiration !== "") {
             $documents->expiration = $this->expiration;
         }
 
@@ -232,5 +239,4 @@ class ContractorDashboard extends Component
         $this->reset('addDocuments');
         $this->addDocuments = true;
     }
-
 }

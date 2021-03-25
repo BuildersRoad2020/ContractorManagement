@@ -219,7 +219,7 @@
 
             <livewire:contractor-skill-list :id="$viewContractor" :key="$viewContractor" wire:model.defer />
 
-
+     
 
         </x-slot>
 

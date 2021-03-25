@@ -48,12 +48,17 @@ class DocumentReview extends Component
         ->when($this->status, function ($query) {
             return $query->where('status', $this->status);
         })
-        ->paginate('15');
+        ->paginate('9');
           
        // dd($documents);
        
         return view('livewire.document-review', [
             'documents' => $documents,
+            'review' => ContractorDocuments::where('status', 0)->count(),
+            'approved' => ContractorDocuments::where('status', 1)->count(),
+            'rejected' => ContractorDocuments::where('status', 2)->count(),
+            'expiring' => ContractorDocuments::where('status', 4)->count(),    
+            'expired' => ContractorDocuments::where('status', 3)->count(),                       
         ]);
     }
 

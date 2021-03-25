@@ -53,3 +53,35 @@
      </div> @endif
 
  </div>
+
+ <div class="flex justify-start md:flex flex-wrap mb-2"> @if(count($rates) > 0)
+     <h2 class="text-gray-800 font-semibold ml-2 mt-2"> Contractor Rates </h2>
+     <hr class="w-full mt-2 mb-2">
+
+     <div class="grid md:grid-cols-3 text-sm"> @foreach ($rates as $id)
+         <div class="grid grid-cols-1">
+             <div class="text-gray-600 text-sm font-bold" title="First Hour">
+                 <div class="flex no-wrap">
+                     {{$id->rate }} {{$id->Contractors->ContractorDetails->currency }}
+               
+                 </div>
+             </div>
+
+             @if($id->rate2 != null)
+             <div class="text-gray-500 text-xs" title="Subsequent">
+                 <div class="flex no-wrap">
+                     {{$id->rate2 }} {{$id->Contractors->ContractorDetails->currency }}
+                     <svg class="h-3 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                     </svg>
+                 </div>
+             </div>
+             @endif
+
+             <div class="text-gray-500 text-xs">
+                 <p class="text-xs">@if($id->Cities != null) {{ucfirst($id->Cities->name)}} @endif {{$id->States->name}}, {{$id->Countries->name}} </p>
+             </div>
+         </div> @endforeach
+     </div> @endif
+
+ </div>
