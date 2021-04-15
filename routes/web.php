@@ -22,26 +22,30 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+Route::middleware(['auth:sanctum', 'verified', 'changedefaultpassword'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/contractors', function () {
+Route::middleware(['auth:sanctum', 'verified', 'changedefaultpassword'])->get('/contractors', function () {
     return view('contractors');
 })->name('contractors');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/contractors/documents-review', function () {
+Route::middleware(['auth:sanctum', 'verified', 'changedefaultpassword'])->get('/contractors/documents-review', function () {
     return view('documents-review');
 })->name('documents-review');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/technicians', function () {
+Route::middleware(['auth:sanctum', 'verified', 'changedefaultpassword'])->get('/technicians', function () {
     return view('technicians');
 })->name('technicians');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/users', function () {
+Route::middleware(['auth:sanctum', 'verified', 'changedefaultpassword' ])->get('/users', function () {
     return view('users');
 })->name('users');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/admin/settings', function () {
+Route::middleware(['auth:sanctum', 'verified', 'changedefaultpassword'])->get('/admin/settings', function () {
     return view('settings');
 })->name('settings');
+
+Route::middleware(['auth:sanctum', 'verified', ])->get('/passwordchange/firstlogin', function () {
+    return view('passwordchange');
+})->name('passwordchange');
