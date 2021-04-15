@@ -16,8 +16,10 @@ class TechnicianDocuments extends Model
         'technicians_id',
         'status',
         'file_path',
-        'expiration'
+        'expiration',
+       
     ];
+
 
     protected static function booted()
     {

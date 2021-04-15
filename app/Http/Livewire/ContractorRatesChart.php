@@ -98,6 +98,7 @@ class ContractorRatesChart extends Component
 
 
         $contractorstatus = ContractorRates::whereIn('state', $types)->get();
+     //   dd($contractorstatus);
 
         $columnChartModel = $contractorstatus->groupBy('state')
             ->reduce(

@@ -9,6 +9,9 @@ use App\Models\Technicians as ModelsTechnician;
 use App\Models\RoleUser;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\WithPagination;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash; 
+use App\Mail\NewUser;
 
 class Technicians extends Component
 {
@@ -67,6 +70,8 @@ class Technicians extends Component
             } 
             break;
       }
+
+    //  dd($technicians);
   
       return view('livewire.technicians', [
             'technicians' => $technicians,
@@ -101,10 +106,12 @@ class Technicians extends Component
             ]
         );
 
+        $password =  STR::random(10);
+
         $user = new User;
         $user->name = ucwords($validatedData['name']);
         $user->email = $validatedData['email'];
-        $user->password = /* Hash::make($password), */ '$2y$10$rhm2pp2wXz7jg5z10ca2/.NfsaXzFTPNq/q2y0ZkKSa6CBwFJYga6';
+        $user->password =  Hash::make($password); /* '$2y$10$rhm2pp2wXz7jg5z10ca2/.NfsaXzFTPNq/q2y0ZkKSa6CBwFJYga6'; */ 
         $user->save();
         $RoleUser = $user->RoleUser()->create(['roles_id' => '3']);
         $Technician = ModelsTechnician::create([
@@ -112,6 +119,16 @@ class Technicians extends Component
             'name' =>  $validatedData['name'],
             'users_id' => $user->id,
         ]);
+
+        $emailuser = [
+            'name' => 'Dear ' . ucwords($validatedData['name']) . ',' ,
+            'body' => 'Your access to Proyekto has been created!',
+            'user' => 'Your username is : ' . $validatedData['email'],
+            'password' => 'Your password is : ' . $password ,
+        ];
+        $emailreceiver = $validatedData['email'];
+
+        \Mail::to($emailreceiver)->send(new NewUser($emailuser));
 
         $this->confirmingTechnicianAdd = false;
         session()->flash('message', 'Technician has been added');
@@ -128,6 +145,7 @@ class Technicians extends Component
         $id->status = 6;
         $id->save();
         $user = User::where('id', $id->users_id)->first();
+        $user->email = Hash::make($user->email);
         $user->status = 6;
         $user->save();
         $this->confirmingTechnicianDelete = false;
@@ -161,6 +179,8 @@ class Technicians extends Component
         if($technician->Countries != null) {
             $this->country = $technician->Countries->name;  
         }  
+
+      
     }
 
 }

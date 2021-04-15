@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Scopes\ActiveUser;
 
 class ContractorDetails extends Model
 
 {
     use HasFactory;
+    
 
     protected $fillable = [
         'contractors_id',
@@ -30,8 +32,14 @@ class ContractorDetails extends Model
         'branch',
         'accountname',
         'bsb',
-        'accountnumber'
+        'accountnumber',
+        'status'
     ];
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new ActiveUser);
+    }
 
     public function Contractors()
     {
@@ -41,6 +49,11 @@ class ContractorDetails extends Model
     public function Countries()
     {
         return $this->belongsTo(Countries::class, 'id', 'Country');
+    }  
+
+    public function Cities()
+    {
+        return $this->belongsTo(Cities::class, 'id', 'city');
     }  
 
 

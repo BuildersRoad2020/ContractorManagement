@@ -42,9 +42,11 @@
             </div>
 
 
+  
+     
 
+            <div class="mt-2 mb-2 flex no-wrap">
 
-            <div class="mt-2 mb-2">
                 <label class="inline-flex items-center">
                     <select class="border border-gray-300 rounded-full text-xs text-gray-600 h-8 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none" wire:model="status">
                         <option value="0">Select Status</option>
@@ -52,6 +54,18 @@
                         <option value="1">Approved</option>
                     </select>
                 </label>
+
+                <div class="pl-2 mt-1" title="Export">
+                <button class="text-xs text-gray-600 h-8 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none" wire:click="export()"  wire:loading.attr="disabled">
+<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current text-indigo-500 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+</svg> 
+                </button>
+                </div>
+      
+            
+
+
             </div>
         </div>
 
@@ -91,6 +105,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
+
+
 
                 <div class="flex flex-row items-center justify-between w-1/4 py-1 px-2 rounded  border-2 border-red-500 border-opacity-50">
                     <div class="flex flex-col">

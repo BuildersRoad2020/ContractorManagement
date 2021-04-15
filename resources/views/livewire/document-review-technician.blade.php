@@ -163,7 +163,7 @@
 
                         <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                             <span class="lg:hidden absolute top-auto left-0 bg-blue-200 px-1 py-1 text-xs font-bold"> Technician <br /> Name</span>
-                            {{$document->Technicians->name}}
+                           {{$document->Technicians->name}} 
                         </td>
 
                         <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">

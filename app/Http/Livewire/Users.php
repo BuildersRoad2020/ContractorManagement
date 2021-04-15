@@ -2,15 +2,20 @@
 
 namespace App\Http\Livewire;
 
+use App\Mail\NewUser;
 use App\Models\Contractors;
 use App\Models\ContractorDetails;
+use App\Models\ContractorDocuments;
 use App\Models\RoleUser;
+use App\Models\TechnicianDocuments;
 use App\Models\Technicians;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+
 
 
 class Users extends Component
@@ -88,7 +93,7 @@ class Users extends Component
         $user = new User;
         $user->name = ucwords($validatedData['name']);
         $user->email = $validatedData['email'];
-        $user->password = /* Hash::make($password), */ '$2y$10$rhm2pp2wXz7jg5z10ca2/.NfsaXzFTPNq/q2y0ZkKSa6CBwFJYga6';
+        $user->password =Hash::make($password);  /*  '$2y$10$rhm2pp2wXz7jg5z10ca2/.NfsaXzFTPNq/q2y0ZkKSa6CBwFJYga6'; */ 
         $user->save();
 
         foreach ($validatedData['role_id'] as $key => $value) {
@@ -135,6 +140,17 @@ class Users extends Component
                     break;
             }
         }
+
+        $emailuser = [
+            'name' => 'Dear ' . ucwords($validatedData['name']) . ',' ,
+            'body' => 'Your access to Proyekto has been created!',
+            'user' => 'Your username is : ' . $validatedData['email'],
+            'password' => 'Your password is : ' . $password ,
+        ];
+        $emailreceiver = $validatedData['email'];
+
+        \Mail::to($emailreceiver)->send(new NewUser($emailuser));
+
         $this->confirmingUserAdd = false;
         session()->flash('message', 'User has been added');
     }
@@ -148,19 +164,70 @@ class Users extends Component
     public function DeleteUser(User $id)
     {
         $id->status = '6';
-        $id->save();
+       
         $contractor = Contractors::where('users_id', $id->id)->first();
+       
+        $contractordocuments = [];
+        $checktechnicians = [];
 
         if ($contractor != null ) {
-        $contractor->status = 6;
+        $contractordocuments = ContractorDocuments::where('contractors_id', $contractor->id)->get();
+        $checktechnicians = Technicians::where('contractors_id', $contractor->id)->get();
+        $contractor->status = '6';
+        $contractordetails = $contractor->ContractorDetails;
+        $contractordetails->status = '6';
+        $contractordetails->save();
         $contractor->save();
         }
 
-        $technician = Technicians::where('users_id', $id->id)->first();
-        if ($technician != null) {
-            $technician->status = 6;
-            $technician->save();
+       
+
+        if($checktechnicians != null) {
+            $updatetechniciandocuments = TechnicianDocuments::whereIn('technicians_id', $checktechnicians->pluck('id'))->get();
+            if ($updatetechniciandocuments != null ) {
+                foreach($updatetechniciandocuments as $updatedtechniciandocuments) {
+                    $updatedtechniciandocuments->status = '6';
+                    $updatedtechniciandocuments->save();
+                }
+            }
+            foreach ($checktechnicians as $updatetechnician) {
+                $thisuser = $updatetechnician->User;
+                $thisuser->status = '6';
+                $updatetechnician->status = '6';
+              
+                $updatetechnician->save();
+                $thisuser->save();
+            }
         }
+
+        
+        if ($contractordocuments != null) {
+           foreach ($contractordocuments as $updatecontractordocuments) {
+               $updatecontractordocuments->status = '6';
+               $updatecontractordocuments->save();
+           }
+       } 
+
+        $technician = Technicians::where('users_id', $id->id)->get();
+        if ($technician != null) {
+            $updatetechniciandocuments = TechnicianDocuments::whereIn('technicians_id', $technician->pluck('id'))->get();
+            if ($updatetechniciandocuments != null ) {
+                foreach($updatetechniciandocuments as $updatedtechniciandocuments) {
+                    $updatedtechniciandocuments->status = '6';
+                    $updatedtechniciandocuments->save();
+                }
+            }
+            foreach ($technician as $updatetechnician) {
+                $thisuser = $updatetechnician->User;
+                $thisuser->status = '6';
+                $updatetechnician->status = '6';
+              
+                $updatetechnician->save();
+                $thisuser->save();
+            }
+        }
+        $id->email = Hash::make($id->email);
+        $id->save();
 
         $this->confirmingUserDelete = false;
         session()->flash('message', 'User has been archived');
