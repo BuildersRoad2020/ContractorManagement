@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
+use Illuminate\Support\Facades\Route;
+URL::forceScheme('https');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
