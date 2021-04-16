@@ -130,6 +130,10 @@
                             </x-jet-dropdown-link>
                             @endcan
 
+                            <x-jet-dropdown-link href="{{ route('forms') }}">
+                                {{ __('Forms') }}
+                            </x-jet-dropdown-link>
+
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
                                     {{ __('API Tokens') }}

@@ -46,6 +46,10 @@ Route::middleware(['auth:sanctum', 'verified', 'changedefaultpassword'])->get('/
     return view('settings');
 })->name('settings');
 
+Route::middleware(['auth:sanctum', 'verified', 'changedefaultpassword'])->get('/forms', function () {
+    return view('forms');
+})->name('forms');
+
 Route::middleware(['auth:sanctum', 'verified', ])->get('/passwordchange/firstlogin', function () {
     return view('passwordchange');
 })->name('passwordchange');
