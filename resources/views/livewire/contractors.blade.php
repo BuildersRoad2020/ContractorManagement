@@ -1,4 +1,4 @@
-<div class="p-6 sm:px-20 bg-white border-b border-gray-200" data-turbolinks="false">
+<div class="p-6 sm:px-20 bg-white border-b border-gray-200">
     @if(session()->has('message'))
     <div class="fixed top-0 right-0 bg-opacity-0 ">
         <div class="text-right py-4 lg:px-4 rounded animate-fade-in-down" wire:poll.5000ms>

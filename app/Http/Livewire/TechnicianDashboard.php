@@ -35,18 +35,13 @@ class TechnicianDashboard extends Component
     public $states = null;
     public $cities = null;
 
+    public $profilename;
+    public $profileaddress;
+    public $profilepostcode;
+    public $profilephone;
+
     public $technicianinfo;
     public $technicianexpiration;
-
-    public $rules = [
-        'profile.name' => ['required'],
-        'profile.address' => ['required'],
-        'profile.postcode' => ['required'],
-        'SelectedCountry' => ['required'],
-        'SelectedState' => ['required'],
-        'SelectedCity' => ['required'],
-        'profile.phone' => ['required','numeric'],
-    ];
 
     public function render()
     {
@@ -77,24 +72,48 @@ class TechnicianDashboard extends Component
         ]);
     }
 
+    public function updatedProfile() 
+    {
+        $this->reset('profile');
+        $this->editprofile = true;
+        $user = Technicians::where('users_id', auth()->user()->id)->first();
+        $this->profileaddress = $user->address;
+        $this->profilepostcode = $user->postcode;
+        $this->profilephone = $user->phone;
+        $this->profilename = $user->name;
+        $this->SelectedCountry = $user->country;
+        $this->SelectedState = $user->state;
+        $this->SelectedCity = $user->city;
+
+
+    }
+
     public function updateProfile() {
-       
-        $this->editprofile = true; 
-        $id = auth()->user()->id;
-        $this->validate();       
         
+        $this->editprofile = true;
+        $id = auth()->user()->id;
+        $validatedData = $this->validate([ 
+            'profilename' => ['required'],
+            'profileaddress' => ['required'],
+            'profilepostcode' => ['required'],
+            'SelectedCountry' => ['required'],
+            'SelectedState' => ['required'],
+            'SelectedCity' => ['required'],
+            'profilephone' => ['required','numeric'],
+        ]);    
+       // dd($validatedData);   
         $technician = Technicians::where('users_id', $id)->with('User')->first();
-        $technician->address = ucwords($this->profile['address']);
-        $technician->postcode = $this->profile['postcode'];
-        $technician->phone = $this->profile['phone'];
-        $technician->name = $this->profile['name'];
+        $technician->address = ucwords($this->profileaddress);
+        $technician->postcode = $this->profilepostcode;
+        $technician->phone = $this->profilephone;
+        $technician->name = ucwords($this->profilename);
         $technician->country = $this->SelectedCountry;
         $technician->state = $this->SelectedState;
         $technician->city = $this->SelectedCity;
         $technician->save();
 
         $user = User::where('id', $technician->users_id)->first();
-        $user->name = ucwords($this->profile['name']);
+        $user->name = ucwords($this->profilename);
         $user->save();
 
         $this->editprofile = false;
@@ -103,6 +122,7 @@ class TechnicianDashboard extends Component
 
     public function confirmUpdateSkills()
     {
+        $this->reset('editskills');
         $this->editskills = true;
     }
 
@@ -118,16 +138,19 @@ class TechnicianDashboard extends Component
         $addskills->technicians_id = $technician->id;
         $addskills->skills_id = $this->profile['skills'];
         $addskills->save();
+        $this->reset('editskills');
+        $this->editskills = true;
         session()->flash('message', 'Skill updated');
 
     }
 
     public function confirmDeleteSkill(Technician_Skills $id)
     {
-        $id->delete();
-        $this->reset('editskills');
-        $this->editskills = true;
-        session()->flash('message', 'Skills have been updated');
+       // dd($id);
+       $id->delete();
+       $this->reset('editskills');
+       $this->editskills = true;
+       session()->flash('message', 'Skills have been updated');
     }
     
     public function updatedSelectedCountry($countries_id)
@@ -152,7 +175,7 @@ class TechnicianDashboard extends Component
         $technicians = Technicians::with('User')->where('users_id', auth()->user()->id)->select('id', 'name')->first();
         $validatedData = $this->validate([
             'technicianinfo.documents_id' => ['required'],
-            'technicianinfo.file_path' => ['nullable', 'mimes:pdf', 'max:2000'],
+            'technicianinfo.file_path' => ['required', 'mimes:pdf', 'max:2000'],
             'technicianexpiration' => 'nullable|date|after:tomorrow',
         ]);
 
@@ -167,6 +190,7 @@ class TechnicianDashboard extends Component
 
         $documentstable = Documents::where('id', $this->technicianinfo['documents_id'])->pluck('name')->first();
 
+       
         if ($this->technicianinfo['file_path'] != null) {
             $File = $this->technicianinfo['file_path'];
             $FileName = $documentstable . '_' . $technicians->name . '_' . time() . '.' . $File->getClientOriginalExtension();
@@ -191,5 +215,6 @@ class TechnicianDashboard extends Component
         $id->delete();
         $this->reset('addDocuments');
         $this->addDocuments = true;
+        session()->flash('message', 'Document list updated');
     }
 }

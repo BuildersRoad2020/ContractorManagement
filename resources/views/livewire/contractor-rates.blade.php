@@ -1,5 +1,5 @@
 <div class="bg-gray-100 -mt-16">
-    <div class="container mx-auto my-5 p-5 h-full ">
+    <div class="container my-5 pt-5 pb-2 pr-6 w-auto  h-full "> 
         <div class="md:flex no-wrap md:-mx-2">
             <div class="w-full h-full md:w-3/12 md:mx-2 "> 
             </div>

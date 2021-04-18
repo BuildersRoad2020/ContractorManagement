@@ -107,7 +107,7 @@
         </x-jet-dialog-modal>
 
         @isset ($documents)
-        <div class="mt-2 p-2 sm:px-4" wire:poll.5000ms>
+        <div class="mt-2 p-2 sm:px-4">
             <table class="border-collapse w-full">
                 <thead>
                     <tr>

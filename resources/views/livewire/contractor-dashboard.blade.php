@@ -99,7 +99,7 @@
                                     <span class="tracking-wide -mt-1 ml-2">Details</span>
                                 </div>
                                 <div class="mt-2 mb-2 pl-2">
-                                    <x-jet-button wire:click="confirmUpdateDetails" wire:loading.attr="disabled">
+                                    <x-jet-button wire:click="confirmUpdateDetails({{$contractors->id}})" wire:loading.attr="disabled">
                                         {{ __('Update') }}
                                     </x-jet-button>
                                 </div>
@@ -108,7 +108,7 @@
 
 
                             <div class="text-gray-700">
-                                <div class="grid md:grid-cols-2 text-sm">
+                                <div class="grid md:grid-cols-1 text-sm">
                                     <div class="grid grid-cols-2">
                                         <div class="px-4 py-2 font-semibold">Contact Person</div>
                                         <div class="px-4 py-2">{{$contractors->ContractorDetails->name_primarycontact}} @if($contractors->ContractorDetails->name_secondarycontact != null )| {{$contractors->ContractorDetails->name_secondarycontact}} @endif </div>
@@ -119,7 +119,7 @@
                                     </div>
                                     <div class="grid grid-cols-2">
                                         <div class="px-4 py-2 font-semibold">Email</div>
-                                        <div class="px-4 py-2" href="mailto:{{$contractors->ContractorDetails->email_primary }}">{{$contractors->ContractorDetails->email_primary}} @if($contractors->ContractorDetails->email_secondary != null) | {{$contractors->ContractorDetails->email_secondary }} @endif</div>
+                                        <div class="px-4 py-2 w-auto" href="mailto:{{$contractors->ContractorDetails->email_primary }}">{{$contractors->ContractorDetails->email_primary}} @if($contractors->ContractorDetails->email_secondary != null) | {{$contractors->ContractorDetails->email_secondary }} @endif</div>
                                     </div>
 
                                     <div class="grid grid-cols-2">
@@ -161,7 +161,7 @@
                                     <span class="tracking-wide -mt-1 ml-2">Financial</span>
                                 </div>
                                 <div class="mt-2 mb-2 pl-2">
-                                    <x-jet-button wire:click="confirmUpdateFinancial" wire:loading.attr="disabled">
+                                    <x-jet-button wire:click="confirmUpdateFinancial({{$contractors->id}})" wire:loading.attr="disabled">
                                         {{ __('Update') }}
                                     </x-jet-button>
                                 </div>

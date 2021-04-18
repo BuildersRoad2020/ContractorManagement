@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\URL;
 
 use Illuminate\Support\Facades\Route;
-URL::forceScheme('https');
+//URL::forceScheme('https');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +25,10 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified', 'changedefaultpassword'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified',])->get('/testing', function () {
+    return view('test');
+})->name('test');
 
 Route::middleware(['auth:sanctum', 'verified', 'changedefaultpassword'])->get('/contractors', function () {
     return view('contractors');

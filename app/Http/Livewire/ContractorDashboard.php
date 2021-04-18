@@ -97,9 +97,23 @@ class ContractorDashboard extends Component
         $this->cities = Cities::where('states_id', $states_id)->get();
     }
 
-    public function confirmUpdateDetails()
+    public function confirmUpdateDetails(Contractors $id)
     {
+        $id = Contractors::with('User')->where('users_id', auth()->user()->id)->first();
+       // dd($id->address);
         $this->updatedetails = true;
+        $this->contractorinfo['name'] = $id->name;
+        $this->contractordetailsinfo['address'] = $id->contractordetails->address;
+        $this->contractordetailsinfo['postcode'] = $id->contractordetails->postcode;
+        $this->SelectedCountry = $id->contractordetails->country;
+        $this->SelectedState = $id->contractordetails->state;
+        $this->SelectedCity = $id->contractordetails->city;
+        $this->contractordetailsinfo['name_primarycontact'] = $id->contractordetails->name_primarycontact;
+        $this->contractordetailsinfo['phone_primary'] = $id->contractordetails->phone_primary;
+        $this->contractordetailsinfo['email_primary'] = $id->contractordetails->email_primary;
+        $this->name_secondarycontact =  $id->contractordetails->name_secondarycontact;
+        $this->phone_secondary =  $id->contractordetails->phone_secondary;
+        $this->email_secondary =  $id->contractordetails->email_secondary;
     }
 
     public function updateDetails()
@@ -110,7 +124,7 @@ class ContractorDashboard extends Component
         $contractors->name = $this->contractorinfo['name'];
         $contractors->save();
         $contractor = ContractorDetails::where('contractors_id', $contractors->id)->first();
-        $contractor->address = $this->contractordetailsinfo['address'];
+        $contractor->address = ucwords($this->contractordetailsinfo['address']);
         $contractor->postcode = $this->contractordetailsinfo['postcode'];
         $contractor->country = $this->SelectedCountry;
         $contractor->state = $this->SelectedState;
@@ -128,9 +142,18 @@ class ContractorDashboard extends Component
         session()->flash('message', 'Details has been updated');
     }
 
-    public function confirmUpdateFinancial()
+    public function confirmUpdateFinancial(Contractors $id)
     {
+        $id = Contractors::with('User')->where('users_id', auth()->user()->id)->first();
         $this->updatefinancial = true;
+        $this->contractordetailsinfo['abn'] = $id->contractordetails->abn;
+        $this->contractordetailsinfo['terms'] = $id->contractordetails->terms;
+        $this->contractordetailsinfo['currency'] = $id->contractordetails->currency;
+        $this->contractordetailsinfo['bankname'] = $id->contractordetails->bankname;
+        $this->contractordetailsinfo['branch'] = $id->contractordetails->branch;
+        $this->contractordetailsinfo['accountname']  = $id->contractordetails->accountname;
+        $this->contractordetailsinfo['bsb'] = $id->contractordetails->bsb;
+        $this->contractordetailsinfo['accountnumber'] = $id->contractordetails->accountnumber;
     }
 
     public function updateFinancial()
@@ -199,7 +222,7 @@ class ContractorDashboard extends Component
         $contractors = Contractors::with('User')->where('users_id', auth()->user()->id)->select('id', 'name')->first();
         $validatedData = $this->validate([
             'contractordetailsinfo.documents_id' => ['required'],
-            'contractordetailsinfo.file_path' => ['nullable', 'mimes:pdf', 'max:2000'],
+            'contractordetailsinfo.file_path' => ['required', 'mimes:pdf', 'max:2000'],
             'expiration' => 'nullable|date|after:tomorrow',
         ]);
         $documents = new ContractorDocuments;
@@ -213,6 +236,7 @@ class ContractorDashboard extends Component
 
         $documentstable = Documents::where('id', $this->contractordetailsinfo['documents_id'])->pluck('name')->first();
 
+        
         if ($this->contractordetailsinfo['file_path'] != null) {
             $File = $this->contractordetailsinfo['file_path'];
             $FileName = $documentstable . '_' . $contractors->name . '_' . time() . '.' . $File->getClientOriginalExtension();

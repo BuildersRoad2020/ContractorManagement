@@ -1,4 +1,4 @@
-<div class="bg-gray-100">
+<div>
 
 
     @if(session()->has('message'))
@@ -17,7 +17,7 @@
     </div>
     @endif
 
-    <div class="container mx-auto my-5 p-5 h-full" wire:poll.4000ms>
+    <div class="container mx-auto my-5 p-5 h-full">
         <div class="md:flex no-wrap md:-mx-2 ">
             <!-- Left Side -->
             <div class="w-full h-full md:w-3/12 md:mx-2">
@@ -93,7 +93,7 @@
                                 </div>
 
                                 <div class="pr-2">
-                                    <x-jet-button wire:click="updateProfile" wire:loading.attr="disabled">
+                                    <x-jet-button wire:click="updatedProfile" wire:loading.attr="disabled">
                                         {{ __('Update') }}
                                     </x-jet-button>
                                 </div>
@@ -265,28 +265,31 @@
                 </div>
             </div>
         </div>
-        <x-jet-dialog-modal wire:model.defer="editprofile">
+
+    </div>
+
+    <x-jet-dialog-modal wire:model.defer="editprofile">
             <x-slot name="title">
                 {{ __('Update Details') }}
             </x-slot>
 
             <x-slot name="content">
                 <div>
-                    <x-jet-label for="profile.name" value="{{ __('Technician Name') }}" />
-                    <x-jet-input class="block mt-1 w-full" type="text" required wire:model.defer="profile.name" />
-                    <x-jet-input-error for="profile.name" class="mt-2" />
+                    <x-jet-label for="profilename" value="{{ __('Technician Name') }}" />
+                    <x-jet-input class="block mt-1 w-full" type="text" required wire:model.defer="profilename" />
+                    <x-jet-input-error for="profilename" class="mt-2" />
                 </div>
 
                 <div>
-                    <x-jet-label for="profile.phone" value="{{ __('Phone') }}" />
-                    <x-jet-input class="block mt-1 w-full" type="text" required wire:model.defer="profile.phone" />
-                    <x-jet-input-error for="profile.phone" class="mt-2" />
+                    <x-jet-label for="profilephone" value="{{ __('Phone') }}" />
+                    <x-jet-input class="block mt-1 w-full" type="text" required wire:model.defer="profilephone" />
+                    <x-jet-input-error for="profilephone" class="mt-2" />
                 </div>
 
                 <div>
-                    <x-jet-label for="profile.address" value="{{ __('Address') }}" />
-                    <x-jet-input class="block mt-1 w-full" type="text" required wire:model.defer="profile.address" />
-                    <x-jet-input-error for="profile.address" class="mt-2" />
+                    <x-jet-label for="profileaddress" value="{{ __('Address') }}" />
+                    <x-jet-input class="block mt-1 w-full" type="text" required wire:model.defer="profileaddress" />
+                    <x-jet-input-error for="profileaddress" class="mt-2" />
                 </div>
 
                 <div class="mr-2 w-full md:w-full mb-1 mt-1">
@@ -325,9 +328,9 @@
                 </div>
 
                 <div>
-                    <x-jet-label for="profile.postcode" value="{{ __('POSTCODE') }}" />
-                    <x-jet-input class="block mt-1 w-full" type="text" required wire:model.defer="profile.postcode" />
-                    <x-jet-input-error for="profile.postcode" class="mt-2" />
+                    <x-jet-label for="profilepostcode" value="{{ __('POSTCODE') }}" />
+                    <x-jet-input class="block mt-1 w-full" type="text" required wire:model.defer="profilepostcode" />
+                    <x-jet-input-error for="profilepostcode" class="mt-2" />
                 </div>
                 @endif
             </x-slot>
@@ -344,7 +347,7 @@
             </x-slot>
         </x-jet-dialog-modal>
 
-        <x-jet-dialog-modal wire:model="editskills">
+        <x-jet-dialog-modal wire:model.defer="editskills" >
             <x-slot name="title">
                 {{ __('Update Skills') }}
             </x-slot>
@@ -365,7 +368,7 @@
                     @foreach($skills as $skill)
                     <span class="px-2 inline-flex text-s leading-5 font-semibold rounded-full bg-indigo-600 text-white mt-3 transition duration-500 ease-in-out transform hover:-translate-y-1"> {{$skill->Skills->name}}
 
-                        <button type="submit" wire:click="confirmDeleteSkill( {{$skill->id}})" wire:loading.attr="disabled">
+                        <button type="submit" wire:click="confirmDeleteSkill( {{$skill->id}})">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 1 20 20" fill="currentColor" class="text-white h-4 w-4 fill-current">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
                             </svg>
@@ -479,5 +482,5 @@
             </x-slot>
 
         </x-jet-dialog-modal>
-    </div>
+
 </div>

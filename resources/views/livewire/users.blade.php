@@ -114,7 +114,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody data-turbolinks="false" wire:poll.2000ms>
+                <tbody>
                     @foreach($users as $user)
                     <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
                         <td class="w-full lg:w-auto p-3 text-gray-800 text-center  border border-b block lg:table-cell relative lg:static">
