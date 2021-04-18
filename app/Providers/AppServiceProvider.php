@@ -17,7 +17,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
-
     }
 
     /**
@@ -28,8 +27,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        if(config('app.debug')!=true) {
+/*         if (config('app.debug') != true) {
             \URL::forceScheme('https');
-          }
+        } */
     }
 }
