@@ -26,9 +26,6 @@ Route::middleware(['auth:sanctum', 'verified', 'changedefaultpassword'])->get('/
     return view('dashboard');
 })->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified',])->get('/testing', function () {
-    return view('test');
-})->name('test');
 
 Route::middleware(['auth:sanctum', 'verified', 'changedefaultpassword'])->get('/contractors', function () {
     return view('contractors');
