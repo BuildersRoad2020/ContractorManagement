@@ -138,7 +138,7 @@ class TechnicianDashboard extends Component
         $addskills->technicians_id = $technician->id;
         $addskills->skills_id = $this->profile['skills'];
         $addskills->save();
-        $this->reset('editskills');
+       // $this->reset('editskills');
         $this->editskills = true;
         session()->flash('message', 'Skill updated');
 
