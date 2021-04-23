@@ -57,7 +57,7 @@ class Technicians extends Component
                     ->paginate(9);
             }   
 
-            if ($role_id == 2) {               //search Technicians table only assigned to this contractor
+            else {               //search Technicians table only assigned to this contractor
                 $id = auth()->user()->id;       
                 $contractor = Contractors::where('users_id', $id)->pluck('id');
                 $technicians = ModelsTechnician::where('contractors_id', $contractor)
@@ -68,6 +68,8 @@ class Technicians extends Component
                     })
                     ->paginate(9);
             } 
+
+
             break;
       }
 
